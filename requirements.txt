@@ -1,0 +1,4 @@
+# Python >=3.9. Record actual installed versions in your final analysis environment.
+numpy>=1.20
+# Optional only for Excel metadata (.xlsx): pandas and openpyxl.
+# CSV/TSV metadata uses the Python standard library.
