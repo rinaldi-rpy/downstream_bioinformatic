@@ -1,9 +1,9 @@
 library(ape)
 out <- Sys.getenv("OUT_DIR")
-mat <- as.matrix(read.csv(file.path(out, "fst_matrix.csv"), row.names = 1, check.names = FALSE))
-pairs <- read.csv(file.path(out, "pair_definitions.csv"), check.names = FALSE)
-results <- read.csv(file.path(out, "pairwise_fst_summary.csv"), check.names = FALSE)
-boot <- read.csv(file.path(out, "bootstrap_fst.csv"), check.names = FALSE)
+mat <- as.matrix(read.csv(file.path(out, "fst_matrix.csv"), row.names = 1, check.names = FALSE, stringsAsFactors = FALSE))
+pairs <- read.csv(file.path(out, "pair_definitions.csv"), check.names = FALSE, stringsAsFactors = FALSE)
+results <- read.csv(file.path(out, "pairwise_fst_summary.csv"), check.names = FALSE, stringsAsFactors = FALSE)
+boot <- read.csv(file.path(out, "bootstrap_fst.csv"), check.names = FALSE, stringsAsFactors = FALSE)
 groups <- rownames(mat)
 ij <- cbind(match(pairs$Population1, groups), match(pairs$Population2, groups))
 make_tree <- function(values) {
@@ -14,7 +14,7 @@ make_tree <- function(values) {
 }
 tree <- make_tree(results$FST)
 trees <- lapply(seq_len(nrow(boot)), function(i) {
-  make_tree(as.numeric(unlist(boot[i, pairs$Pair_ID, drop = FALSE], use.names = FALSE)))
+  make_tree(as.numeric(unlist(boot[i, as.character(pairs$Pair_ID), drop = FALSE], use.names = FALSE)))
 })
 class(trees) <- "multiPhylo"
 support <- 100 * prop.clades(tree, trees, rooted = FALSE) / length(trees)
