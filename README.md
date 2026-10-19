@@ -1,6 +1,6 @@
 # Buffalo population genomics workflow
 
-Maintainer: Rizal Rinaldi. Code revision: 19 October 2026.
+Code revision: 19 October 2026.
 
 This workflow covers SNP QC, LD pruning, PCA, replicated ADMIXTURE,
 windowed pairwise Weir–Cockerham FST, shared genomic-block FST bootstrap
